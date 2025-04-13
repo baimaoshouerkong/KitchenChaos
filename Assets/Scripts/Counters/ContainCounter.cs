@@ -14,5 +14,13 @@ public class ContainCounter : BaseCounter
             KitchenObject.SpawnKitchenObject(kitchenObjectSO, player);
             OnPlayerGrabbedObject?.Invoke(this, EventArgs.Empty);
         }
+        else
+        {
+            if (player.GetKitchenObject().TryGetPlate(out PlateKitchenObject plateKitchenObject))
+            {
+                if (plateKitchenObject.TryAddIngredient(kitchenObjectSO))
+                    OnPlayerGrabbedObject?.Invoke(this, EventArgs.Empty);
+            }
+        }
     }
 }

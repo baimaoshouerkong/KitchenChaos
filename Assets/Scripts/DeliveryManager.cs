@@ -37,7 +37,6 @@ public class DeliveryManager : MonoBehaviour
 
     private void Update()
     {
-        Debug.Log("spawnRecipeTimer: " + spawnRecipeTimer);
         spawnRecipeTimer -= Time.deltaTime;
         if (spawnRecipeTimer <= 0f)
         {

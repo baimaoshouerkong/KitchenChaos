@@ -38,7 +38,6 @@ public class Player : MonoBehaviour, IKitchenObjectParent
     {
         if (!KitchenGameManager.Instance.IsGamePlaying())
         {
-            Debug.Log("Game is not playing, cannot interact.");
             return;
         }
         if (selectedCounter != null)
@@ -50,7 +49,6 @@ public class Player : MonoBehaviour, IKitchenObjectParent
     {
         if (!KitchenGameManager.Instance.IsGamePlaying())
         {
-            Debug.Log("Game is not playing, cannot interact.");
             return;
         }
         if (selectedCounter != null)

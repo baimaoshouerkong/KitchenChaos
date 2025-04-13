@@ -31,7 +31,6 @@ public class PlateKitchenObject : KitchenObject
         {
             kitchenObjectSOList.Add(kitchenObjectSO);
             OnIngredientAdded?.Invoke(this, new OnIngredientAddedEventArgs { kitchenObjectSO = kitchenObjectSO });
-            
             return true;
         }
     }
@@ -39,4 +38,5 @@ public class PlateKitchenObject : KitchenObject
     {
         return kitchenObjectSOList;
     }
+
 }
