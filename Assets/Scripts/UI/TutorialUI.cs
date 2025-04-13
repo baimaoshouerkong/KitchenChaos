@@ -47,9 +47,11 @@ public class TutorialUI : MonoBehaviour
         keyInteractText.text = GameInput.Instance.GetBingdingText(GameInput.Binding.Interact);
         keyInteractAlternateText.text = GameInput.Instance.GetBingdingText(GameInput.Binding.InteractAlternate);
         keyPauseText.text = GameInput.Instance.GetBingdingText(GameInput.Binding.Pause);
+        ChangeFontSize(keyPauseText);
         keyGamepadInteractText.text = GameInput.Instance.GetBingdingText(GameInput.Binding.Gamepad_Interact);
         keyGamepadInteractAlternateText.text = GameInput.Instance.GetBingdingText(GameInput.Binding.Gamepad_InteractAlternate);
         keyGamepadPauseText.text = GameInput.Instance.GetBingdingText(GameInput.Binding.Gamepad_Pause);
+        ChangeFontSize(keyGamepadPauseText);
     }
     private void Show()
     {
@@ -58,5 +60,20 @@ public class TutorialUI : MonoBehaviour
     private void Hide()
     {
         gameObject.SetActive(false);
+    }
+    private void ChangeFontSize(TextMeshProUGUI textMeshPro)
+    {
+        float fontSize = textMeshPro.fontSize;
+        if (textMeshPro.text.Length > 3)
+        {
+            if (textMeshPro.text == "Escape")
+            {
+                textMeshPro.text = "Esc";
+            }
+            else
+            {
+                textMeshPro.fontSize = fontSize / (textMeshPro.text.Length - 2) + 7.5f;
+            }
+        }
     }
 }

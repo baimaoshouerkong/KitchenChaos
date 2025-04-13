@@ -2,6 +2,7 @@ using System;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -109,10 +110,11 @@ public class OptionsUI : MonoBehaviour
         interactText.text = GameInput.Instance.GetBingdingText(GameInput.Binding.Interact);
         interactAlternateText.text = GameInput.Instance.GetBingdingText(GameInput.Binding.InteractAlternate);
         pauseText.text = GameInput.Instance.GetBingdingText(GameInput.Binding.Pause);
+        ChangeFontSize(pauseText);
         gamepadInteractText.text = GameInput.Instance.GetBingdingText(GameInput.Binding.Gamepad_Interact);
         gamepadInteractAlternateText.text = GameInput.Instance.GetBingdingText(GameInput.Binding.Gamepad_InteractAlternate);
         gamepadPauseText.text = GameInput.Instance.GetBingdingText(GameInput.Binding.Gamepad_Pause);
-
+        ChangeFontSize(gamepadPauseText);
     }
     public void Show(Action onCloseButtonAction)
     {
@@ -137,11 +139,26 @@ public class OptionsUI : MonoBehaviour
     {
 
         ShowPressToRebindKey(binding);
-        GameInput.Instance.RebindBinding(binding,()=>
+        GameInput.Instance.RebindBinding(binding, () =>
         {
             HidePressToRebindKey();
             UpdateVisual();
-         });
-       
+        });
+
+    }
+    private void ChangeFontSize(TextMeshProUGUI textMeshPro)
+    {
+        float fontSize = textMeshPro.fontSize;
+        if (textMeshPro.text.Length > 3)
+        {
+            if (textMeshPro.text == "Escape")
+            {
+                textMeshPro.text = "Esc";
+            }
+            else
+            {
+                textMeshPro.fontSize = fontSize / (textMeshPro.text.Length - 2) + 7.5f;
+            }
+        }
     }
 }
