@@ -6,6 +6,7 @@ public class KitchenObject : MonoBehaviour
 {
     [SerializeField] private KitchenObjectSO kitchenObjectSO;
     private IKitchenObjectParent kitchenObjectParent;
+    private float price;
     public KitchenObjectSO GetKitchenObjectSO()
     {
         return kitchenObjectSO;
@@ -19,7 +20,6 @@ public class KitchenObject : MonoBehaviour
         this.kitchenObjectParent = kitchenObject;
         if (kitchenObjectParent.HasKitchenObject())
         {
-            Debug.Log("ClearCounter already has a kitchen object");
         }
         kitchenObjectParent.SetKitchenObject(this);
         transform.parent = kitchenObjectParent.GetKitchenObjectFollowTransform();

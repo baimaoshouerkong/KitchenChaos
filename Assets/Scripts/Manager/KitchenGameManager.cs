@@ -11,9 +11,10 @@ public class KitchenGameManager : MonoBehaviour
     public event EventHandler OnGameUnpaused;
     private enum State
     {
-        WaitingToStart,
+        Purchase,
         CountdownToStart,
         GamePlaying,
+        EndDay,
         GameOver,
     }
     private State state;
@@ -24,21 +25,16 @@ public class KitchenGameManager : MonoBehaviour
     private void Awake()
     {
         Instance = this;
-        state = State.WaitingToStart;
+        state = State.Purchase;
     }
     private void Start()
     {
         GameInput.Instance.OnPauseAction += GameInput_OnPauseAction;
-        GameInput.Instance.OnInteractAction += GameInput_OnInteractAction;
     }
-
-    private void GameInput_OnInteractAction(object sender, EventArgs e)
+    public void StartGame()
     {
-        if (state == State.WaitingToStart)
-        {
-            state = State.CountdownToStart;
-            OnStateChanged?.Invoke(this,EventArgs.Empty);
-        }
+        state = State.CountdownToStart;
+        OnStateChanged?.Invoke(this, EventArgs.Empty);
     }
 
     private void GameInput_OnPauseAction(object sender, EventArgs e)
@@ -50,8 +46,9 @@ public class KitchenGameManager : MonoBehaviour
     {
         switch (state)
         {
-            case State.WaitingToStart:
-         
+            case State.Purchase:
+                // Handle purchase logic here
+                PurchaseUI.Instance.Show();
                 break;
             case State.CountdownToStart:
                 // Start the game countdown
@@ -111,4 +108,6 @@ public class KitchenGameManager : MonoBehaviour
             OnGameUnpaused?.Invoke(this, EventArgs.Empty);
         }
     }
+    
+
 }
