@@ -37,7 +37,7 @@ public class SerializableDictionary<TKey, TValue> : ISerializationCallbackReceiv
         for (int i = 0; i < list.Count; i++)
         {
             var kvp = list[i];
-            if (dictionary.ContainsKey(kvp.Key))
+            if (kvp.Key != null && dictionary.ContainsKey(kvp.Key))
             {
                 list[i] = new SerializableKeyValuePair
                 {
@@ -75,9 +75,5 @@ public class SerializableDictionary<TKey, TValue> : ISerializationCallbackReceiv
     {
         get => dictionary[key];
         set => dictionary[key] = value;
-    }
-    public static implicit operator Dictionary<TKey, TValue>(SerializableDictionary<TKey, TValue> serializableDictionary)
-    {
-        return serializableDictionary.dictionary;
     }
 }

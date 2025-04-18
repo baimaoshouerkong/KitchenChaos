@@ -12,7 +12,7 @@ public class SaveData
     public int dayCount;
     public SerializableDictionary<KitchenObjectSO, float> rawPriceDict;
     public SerializableDictionary<KitchenObjectSO, int> storeItemDictionary;
-    public SaveData()
+    public SaveData(string a)
     {
         money = MoneyManager.Instance.GetMoney();
         dayCount = DayManager.Instance.GetDayCount();
@@ -40,7 +40,7 @@ public class SaveManager : MonoBehaviour
     }
     public void SaveGame()
     {
-        string json = JsonUtility.ToJson(new SaveData());
+        string json = JsonUtility.ToJson(new SaveData("save"));
         System.IO.File.WriteAllText(filename, json);
     }
     public void LoadGame()
@@ -48,6 +48,7 @@ public class SaveManager : MonoBehaviour
         if (System.IO.File.Exists(filename))
         {
             string json = System.IO.File.ReadAllText(filename);
+            Debug.Log(json);
             SaveData saveData = JsonUtility.FromJson<SaveData>(json);
             foreach (KeyValuePair<KitchenObjectSO, int> item in saveData.storeItemDictionary)
             {

@@ -39,7 +39,6 @@ public class StoreManager : MonoBehaviour
     internal void LoadData(SerializableDictionary<KitchenObjectSO, int> storeItemDictionary)
     {
         this.storeItemDictionary = storeItemDictionary;
-        this.storeItemDictionary.OnBeforeSerialize();
         OnStoreItemChanged?.Invoke(this, EventArgs.Empty);
     }
 }

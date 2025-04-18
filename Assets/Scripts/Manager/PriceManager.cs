@@ -23,7 +23,6 @@ public class PriceManager : MonoBehaviour
     public void LoadData(SerializableDictionary<KitchenObjectSO, float> dict)
     {
         rawPriceDict = dict;
-        rawPriceDict.OnBeforeSerialize();
     }
 
 }
