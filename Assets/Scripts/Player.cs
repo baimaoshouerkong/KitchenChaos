@@ -22,10 +22,6 @@ public class Player : MonoBehaviour, IKitchenObjectParent
     private Vector3 lastInteractDir;
     private void Awake()
     {
-        if (Instance != null)
-        {
-            Debug.LogError("There is more than one Player instance in the scene");
-        }
         Instance = this;
     }
     // Start is called before the first frame update
@@ -33,6 +29,11 @@ public class Player : MonoBehaviour, IKitchenObjectParent
     {
         gameInput.OnInteractAction += GameInput_OnInteractAction;
         gameInput.OnInteractAlternateAction += GameInput_OnInteractAlternateAction;
+    }
+    private void OnDestroy()
+    {
+        gameInput.OnInteractAction -= GameInput_OnInteractAction;
+        gameInput.OnInteractAlternateAction -= GameInput_OnInteractAlternateAction; 
     }
     private void GameInput_OnInteractAction(object sender, System.EventArgs e)
     {

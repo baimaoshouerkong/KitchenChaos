@@ -8,7 +8,6 @@ public class StoreIconUI : MonoBehaviour
     private void Awake()
     {
         template.gameObject.SetActive(false);
-        
     }
     private void Start()
     {
@@ -16,7 +15,10 @@ public class StoreIconUI : MonoBehaviour
         template.gameObject.SetActive(true);
         UpdateVisual();
     }
-
+    private void OnDestroy()
+    {
+        StoreManager.Instance.OnStoreItemChanged -= StoreManager_OnStoreItemChanged;
+    }
 
     private void UpdateVisual()
     {
@@ -26,7 +28,7 @@ public class StoreIconUI : MonoBehaviour
             Destroy(child.gameObject);
         }
         int flag = 1;
-        Dictionary<KitchenObjectSO, int> priceDictionary = StoreManager.Instance.GetStoreItemDictonary();
+        SerializableDictionary<KitchenObjectSO, int> priceDictionary = StoreManager.Instance.GetStoreItemDictonary();
         foreach (KeyValuePair<KitchenObjectSO, int> price in priceDictionary)
         {
             if (flag == 1)

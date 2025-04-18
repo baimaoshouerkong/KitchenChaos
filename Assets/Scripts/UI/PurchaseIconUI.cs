@@ -11,8 +11,8 @@ public class PurchaseIconUI : MonoBehaviour
     [SerializeField] private Transform template;
     [SerializeField] private GameObject purchaseUI;
     [SerializeField] private PurchaseSingleIconUI purchaseSingleIconUI;
-    private Dictionary<KitchenObjectSO, float> priceDictionary = new Dictionary<KitchenObjectSO, float>();
-    private Dictionary<KitchenObjectSO, int> numDictionary = new Dictionary<KitchenObjectSO, int>();
+    private SerializableDictionary<KitchenObjectSO, float> priceDictionary = new SerializableDictionary<KitchenObjectSO, float>();
+    private SerializableDictionary<KitchenObjectSO, int> numDictionary = new SerializableDictionary<KitchenObjectSO, int>();
     
     private void Awake()
     {
@@ -23,8 +23,6 @@ public class PurchaseIconUI : MonoBehaviour
     {
         UpdateVisual();
     }
-
-
     private void UpdateVisual()
     {
         foreach (Transform child in transform)
@@ -34,7 +32,7 @@ public class PurchaseIconUI : MonoBehaviour
         }
         int flag = 1;
         priceDictionary = PriceManager.Instance.GetRawPriceDictionary();
-        foreach (KeyValuePair<KitchenObjectSO, float> price in priceDictionary)
+        foreach (var price in priceDictionary)
         {
             if (flag == 1)
             {
@@ -77,7 +75,7 @@ public class PurchaseIconUI : MonoBehaviour
         gameObject.SetActive(false);
         purchaseUI.SetActive(false);
     }
-    public Dictionary<KitchenObjectSO, int> GetNumDictionary()
+    public SerializableDictionary<KitchenObjectSO, int> GetNumDictionary()
     {
         return numDictionary;
     }

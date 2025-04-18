@@ -39,7 +39,7 @@ public class GameInput : MonoBehaviour
         playerInputActions.Player.InteractAlternate.performed += InteractAlternate_performed;
         playerInputActions.Player.Pause.performed += Pause_performed;
 
-   
+
     }
 
     private void OnDestroy()
@@ -91,7 +91,7 @@ public class GameInput : MonoBehaviour
                 return playerInputActions.Player.Interact.bindings[1].ToDisplayString();
             case Binding.Gamepad_InteractAlternate:
                 return playerInputActions.Player.InteractAlternate.bindings[1].ToDisplayString();
-            case Binding.Gamepad_Pause: 
+            case Binding.Gamepad_Pause:
                 return playerInputActions.Player.Pause.bindings[1].ToDisplayString();
             default:
                 return "Unknown binding";
@@ -153,9 +153,11 @@ public class GameInput : MonoBehaviour
             onActionRebound();
             PlayerPrefs.SetString(PLAYER_PREFS_BINDINGS, playerInputActions.SaveBindingOverridesAsJson());
             PlayerPrefs.Save();
-            OnBindingRebind?.Invoke(this,EventArgs.Empty);
+            OnBindingRebind?.Invoke(this, EventArgs.Empty);
         }).Start();
-
-
+    }
+    public PlayerInputActions GetPlayerInputActions()
+    {
+        return playerInputActions;
     }
 }

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 
+[Serializable]
 public class MoneyManager : MonoBehaviour
 {
     public event EventHandler OnMoneyChanged;
@@ -24,10 +25,15 @@ public class MoneyManager : MonoBehaviour
     {
 
     }
-    
+
     public float GetMoney()
     {
         return money;
+    }
+    public void SetMoney(float amount)
+    {
+        money = amount;
+        OnMoneyChanged?.Invoke(this, EventArgs.Empty);
     }
     public void PayMoney(float amount)
     {
@@ -35,9 +41,5 @@ public class MoneyManager : MonoBehaviour
         Debug.Log("PayMoney" + amount);
         OnMoneyChanged?.Invoke(this, EventArgs.Empty);
     }
-    public void AddMoney(float amount)
-    {
-        money += amount;
-        OnMoneyChanged?.Invoke(this, EventArgs.Empty);
-    }
+    
 }
