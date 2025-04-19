@@ -33,7 +33,7 @@ public class StoreManager : MonoBehaviour
     }
     public bool TryGetKithcenObjectSO(KitchenObjectSO kitchenObjectSO, int value)
     {
-        if (storeItemDictionary[kitchenObjectSO]-value > 0)
+        if (storeItemDictionary[kitchenObjectSO]-value >= 0)
         {
             storeItemDictionary[kitchenObjectSO] -= value;
             return true;

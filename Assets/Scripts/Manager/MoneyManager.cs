@@ -38,7 +38,6 @@ public class MoneyManager : MonoBehaviour
     public void PayMoney(float amount)
     {
         money -= amount;
-        Debug.Log("PayMoney" + amount);
         OnMoneyChanged?.Invoke(this, EventArgs.Empty);
     }
     

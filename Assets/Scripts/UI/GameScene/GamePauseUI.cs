@@ -34,6 +34,14 @@ public class GamePauseUI : MonoBehaviour
         KitchenGameManager.Instance.OnGameUnpaused += KitchenGameManager_OnGameUnpaused;
         Hide();
     }
+    private void OnDestroy()
+    {
+        KitchenGameManager.Instance.OnGamePaused -= KitchenGameManager_OnGamePaused;
+        KitchenGameManager.Instance.OnGameUnpaused -= KitchenGameManager_OnGameUnpaused;
+        resumeButton.GetComponent<Button>().onClick.RemoveAllListeners();
+        mainMenuButton.GetComponent<Button>().onClick.RemoveAllListeners();
+        optionsButton.GetComponent<Button>().onClick.RemoveAllListeners();
+    }
 
     private void KitchenGameManager_OnGameUnpaused(object sender, EventArgs e)
     {

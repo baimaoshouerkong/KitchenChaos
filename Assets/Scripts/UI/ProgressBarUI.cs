@@ -16,6 +16,13 @@ public class ProgressBarUI : MonoBehaviour
         barImage.fillAmount = 0f; // Initialize the progress bar to 0
         Hide();
     }
+    private void OnDestroy()
+    {
+        if (hasProgress != null)
+        {
+            hasProgress.OnProgressChanged -= HasProgress_OnProgressChanged;
+        }
+    }
 
     private void HasProgress_OnProgressChanged(object sender, IHasProgress.OnProgressChangedEventArgs e)
     {

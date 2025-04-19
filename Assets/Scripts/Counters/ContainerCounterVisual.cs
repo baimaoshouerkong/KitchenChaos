@@ -16,7 +16,10 @@ public class ContainerCounterVisual : MonoBehaviour
     {
         containCounter.OnPlayerGrabbedObject += ContainCounter_OnPlayerGrabbedObject;
     }
-
+    private void OnDestroy()
+    {
+        containCounter.OnPlayerGrabbedObject -= ContainCounter_OnPlayerGrabbedObject;
+    }
     private void ContainCounter_OnPlayerGrabbedObject(object sender, EventArgs e)
     {
         animator.SetTrigger(OPEN_CLOSE);

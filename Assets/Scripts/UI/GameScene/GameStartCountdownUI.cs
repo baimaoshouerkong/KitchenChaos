@@ -19,6 +19,10 @@ public class GameStartCountdownUI : MonoBehaviour
         KitchenGameManager.Instance.OnStateChanged += KitchenGameManager_OnStateChanged;
         Hide();
     }
+    private void OnDestroy()
+    {
+        KitchenGameManager.Instance.OnStateChanged -= KitchenGameManager_OnStateChanged;
+    }
     private void Update()
     {
         int countdownNumber = Mathf.CeilToInt(KitchenGameManager.Instance.GetCountdownToStartTimer());

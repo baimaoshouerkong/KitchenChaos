@@ -15,7 +15,7 @@ public class SerializableDictionary<TKey, TValue> : ISerializationCallbackReceiv
         public TValue Value;
     }
 
-
+    private bool isDirty = true;
 
     public Dictionary<TKey, TValue> Dictionary => dictionary;
 
@@ -34,23 +34,28 @@ public class SerializableDictionary<TKey, TValue> : ISerializationCallbackReceiv
     // 从字典向内部列表序列化
     public void OnBeforeSerialize()
     {
-        for (int i = 0; i < list.Count; i++)
+        if (isDirty)
         {
-            var kvp = list[i];
-            if (kvp.Key != null && dictionary.ContainsKey(kvp.Key))
+            for (int i = 0; i < list.Count; i++)
             {
-                list[i] = new SerializableKeyValuePair
+                var kvp = list[i];
+                if (kvp.Key != null && dictionary.ContainsKey(kvp.Key))
                 {
-                    Key = kvp.Key,
-                    Value = dictionary[kvp.Key]
-                };
+                    list[i] = new SerializableKeyValuePair
+                    {
+                        Key = kvp.Key,
+                        Value = dictionary[kvp.Key]
+                    };
+                }
             }
+            isDirty = false;
         }
     }
 
     // 从内部列表向字典反序列化
     public void OnAfterDeserialize()
     {
+        dictionary.Clear();
         foreach (var kvp in list)
         {
             if (kvp.Key != null && !dictionary.ContainsKey(kvp.Key))
@@ -58,6 +63,7 @@ public class SerializableDictionary<TKey, TValue> : ISerializationCallbackReceiv
                 dictionary[kvp.Key] = kvp.Value;
             }
         }
+        isDirty = true;
     }
 
     // 字典接口的包装方法
@@ -66,7 +72,13 @@ public class SerializableDictionary<TKey, TValue> : ISerializationCallbackReceiv
     public bool Remove(TKey key) => dictionary.Remove(key);
     public bool TryGetValue(TKey key, out TValue value) => dictionary.TryGetValue(key, out value);
     public void Clear() => dictionary.Clear();
-
+    public void SetValue(TKey key, TValue value)
+    {
+        if (dictionary.ContainsKey(key))
+        {
+            dictionary[key] = value;
+        }
+    }
 
     public int Count => dictionary.Count;
 

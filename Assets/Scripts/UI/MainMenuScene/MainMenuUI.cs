@@ -9,7 +9,7 @@ public class MainMenuUI : MonoBehaviour
     [SerializeField] private Button playButton;
     [SerializeField] private Button loadButton;
     [SerializeField] private Button quitButton;
-    
+
     private void Awake()
     {
         playButton.onClick.AddListener(() =>
@@ -18,7 +18,7 @@ public class MainMenuUI : MonoBehaviour
         });
         loadButton.onClick.AddListener(() =>
         {
-            Loader.Load(Loader.Scene.GameScene,Loader.GameType.Load);
+            Loader.Load(Loader.Scene.GameScene, Loader.GameType.Load);
         });
         quitButton.onClick.AddListener(() =>
         {
@@ -26,5 +26,11 @@ public class MainMenuUI : MonoBehaviour
         });
         Time.timeScale = 1f;
     }
-  
+    void OnDestroy()
+    {
+        playButton.onClick.RemoveAllListeners();
+        loadButton.onClick.RemoveAllListeners();
+        quitButton.onClick.RemoveAllListeners();
+    }
+
 }

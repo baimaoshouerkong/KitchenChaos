@@ -47,6 +47,13 @@ public class PurchaseUI : MonoBehaviour
             }
         });
     }
+    private void OnDestroy()
+    {
+        enterButton.onClick.RemoveAllListeners();
+        exitButton.onClick.RemoveAllListeners();
+        saveButton.onClick.RemoveAllListeners();
+        buyButton.onClick.RemoveAllListeners();
+    }
 
     private bool TryPurchase()
     {

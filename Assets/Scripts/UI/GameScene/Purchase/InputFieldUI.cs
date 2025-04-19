@@ -64,6 +64,14 @@ public class InputFieldUI : MonoBehaviour
         inputField.text = "0"; // Initialize the input field with a default value
     }
 
+    private void OnDestroy()
+    {
+        decreaseButton.onClick.RemoveAllListeners();
+        increaseButton.onClick.RemoveAllListeners();
+        inputField.onValueChanged.RemoveAllListeners();
+        inputField.onEndEdit.RemoveAllListeners();
+    }
+
     private void IncreaseValue()
     {
         SoundManager.Instance.PlayCountdownSound();

@@ -12,6 +12,7 @@ public class DeliveryManager : MonoBehaviour
 
     public static DeliveryManager Instance { get; private set; }
     private List<RecipeSO> waitingRecipeSOList;
+    private List<RecipeSO> successRecipeSOList;
     [SerializeField] private RecipeListSO recipeListSO;
     private float spawnRecipeTimer;
     private float spawnRecipeTimerMax = 4f;
@@ -21,10 +22,15 @@ public class DeliveryManager : MonoBehaviour
     {
         Instance = this;
         waitingRecipeSOList = new List<RecipeSO>();
+        successRecipeSOList = new List<RecipeSO>();
     }
     private void Start()
     {
         KitchenGameManager.Instance.OnStateChanged += KitchenGameManager_OnStateChanged;
+    }
+    private void OnDestroy()
+    {
+        KitchenGameManager.Instance.OnStateChanged -= KitchenGameManager_OnStateChanged;
     }
 
     private void KitchenGameManager_OnStateChanged(object sender, EventArgs e)
@@ -66,6 +72,7 @@ public class DeliveryManager : MonoBehaviour
                         if (kitchenObjectSO == plateKitchenObjectSO)
                         {
                             ingredientFound = true;
+                            successRecipeSOList.Add(waitingRecipeSO);
                             break;
                         }
                     }
@@ -91,8 +98,20 @@ public class DeliveryManager : MonoBehaviour
     {
         return waitingRecipeSOList;
     }
+    public List<RecipeSO> GetSuccessRecipeSOList()
+    {
+        return successRecipeSOList;
+    }
     public int GetSuccessfulRecipesAmount()
     {
         return successfulRecipesAmount;
+    }
+    public void ClearWaitingRecipeSOList()
+    {
+        waitingRecipeSOList.Clear();
+    }
+    public void ClearSuccessRecipeSOList()
+    {
+        successRecipeSOList.Clear();
     }
 }

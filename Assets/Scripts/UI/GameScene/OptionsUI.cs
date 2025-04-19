@@ -93,6 +93,20 @@ public class OptionsUI : MonoBehaviour
         Hide();
         HidePressToRebindKey();
     }
+    private void OnDestroy()
+    {
+        KitchenGameManager.Instance.OnGameUnpaused -= KitchenGameManager_OnGameUnpaused;
+        soundEffectsButton.onClick.RemoveAllListeners();
+        musicButton.onClick.RemoveAllListeners();
+        closeButton.onClick.RemoveAllListeners();
+        moveUpButton.onClick.RemoveAllListeners();
+        moveDownButton.onClick.RemoveAllListeners();
+        moveLeftButton.onClick.RemoveAllListeners();
+        moveRightButton.onClick.RemoveAllListeners();
+        interactButton.onClick.RemoveAllListeners();
+        interactAlternateButton.onClick.RemoveAllListeners();
+        pauseButton.onClick.RemoveAllListeners();
+    }
 
     private void KitchenGameManager_OnGameUnpaused(object sender, EventArgs e)
     {

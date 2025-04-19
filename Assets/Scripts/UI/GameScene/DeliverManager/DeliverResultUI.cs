@@ -28,6 +28,11 @@ public class DeliverResultUI : MonoBehaviour
         DeliveryManager.Instance.OnRecipeFailed += DeliveryManager_OnRecipeFailed;
         gameObject.SetActive(false);
     }
+    private void OnDestroy()
+    {
+        DeliveryManager.Instance.OnRecipeSuccess -= DeliveryManager_OnRecipeSuccess;
+        DeliveryManager.Instance.OnRecipeFailed -= DeliveryManager_OnRecipeFailed;
+    }
 
     private void DeliveryManager_OnRecipeFailed(object sender, EventArgs e)
     {

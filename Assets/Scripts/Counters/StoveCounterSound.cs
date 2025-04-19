@@ -19,6 +19,11 @@ public class StoveCounterSound : MonoBehaviour
         stoveCounter.OnStateChanged += StoveCounter_OnStateChanged;
         stoveCounter.OnProgressChanged += StoveCounter_OnProgressChanged;
     }
+    private void OnDestroy()
+    {
+        stoveCounter.OnStateChanged -= StoveCounter_OnStateChanged;
+        stoveCounter.OnProgressChanged -= StoveCounter_OnProgressChanged;
+    }
 
     private void StoveCounter_OnProgressChanged(object sender, IHasProgress.OnProgressChangedEventArgs e)
     {

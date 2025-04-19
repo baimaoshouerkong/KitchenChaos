@@ -42,7 +42,8 @@ public class CuttingCounter : BaseCounter, IHasProgress
             {
                 GetKitchenObject().SetKitchenObjectParent(player);
             }
-            else {
+            else
+            {
                 if (player.GetKitchenObject().TryGetPlate(out PlateKitchenObject plateKitchenObject))
                 {
                     if (plateKitchenObject.TryAddIngredient(GetKitchenObject().GetKitchenObjectSO()))
@@ -53,7 +54,7 @@ public class CuttingCounter : BaseCounter, IHasProgress
             }
 
         }
-        
+
     }
     public override void InteractAlternate(Player player)
     {

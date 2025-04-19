@@ -13,6 +13,11 @@ public class WalletUI : MonoBehaviour
 
         MoneyManager.Instance.OnMoneyChanged += MoneyManager_OnMoneyChanged;
     }
+    private void OnDestroy()
+    {
+        // Unsubscribe from the event when the object is destroyed
+        MoneyManager.Instance.OnMoneyChanged -= MoneyManager_OnMoneyChanged;
+    }
     private void UpdateMoneyText()
     {
         // Update the money text with the current money value

@@ -15,6 +15,10 @@ public class PlateIconUI : MonoBehaviour
     {
         plateKitchenObject.OnIngredientAdded += PlateKitchenObject_OnIngredientAdded;
     }
+    private void OnDestroy()
+    {
+        plateKitchenObject.OnIngredientAdded -= PlateKitchenObject_OnIngredientAdded;
+    }
 
     private void PlateKitchenObject_OnIngredientAdded(object sender, PlateKitchenObject.OnIngredientAddedEventArgs e)
     {

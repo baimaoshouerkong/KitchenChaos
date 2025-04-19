@@ -9,11 +9,15 @@ public class GamePlayingClockUI : MonoBehaviour
   [SerializeField] private Image timerImage;
   private void Awake()
   {
-    Hide();
   }
   private void Start()
   {
+    Hide();
     KitchenGameManager.Instance.OnStateChanged += KitchenGameManager_OnStateChanged;
+  }
+  private void OnDestroy()
+  {
+    KitchenGameManager.Instance.OnStateChanged -= KitchenGameManager_OnStateChanged;
   }
   private void Update()
   {
@@ -27,7 +31,7 @@ public class GamePlayingClockUI : MonoBehaviour
   {
     gameObject.SetActive(false);
   }
-  private void KitchenGameManager_OnStateChanged(object sender, System.EventArgs e)
+  private void KitchenGameManager_OnStateChanged(object sender, EventArgs e)
   {
     if (KitchenGameManager.Instance.IsGamePlaying())
     {
