@@ -6,14 +6,13 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class PurchaseIconUI : MonoBehaviour
+public class PurchaseIconUI : IconUI
 {
-    [SerializeField] private Transform template;
     [SerializeField] private GameObject purchaseUI;
     [SerializeField] private PurchaseSingleIconUI purchaseSingleIconUI;
     private SerializableDictionary<KitchenObjectSO, float> priceDictionary = new SerializableDictionary<KitchenObjectSO, float>();
     private SerializableDictionary<KitchenObjectSO, int> numDictionary = new SerializableDictionary<KitchenObjectSO, int>();
-    
+
     private void Awake()
     {
         template.gameObject.SetActive(false);
@@ -21,31 +20,10 @@ public class PurchaseIconUI : MonoBehaviour
     }
     private void Start()
     {
+        priceDictionary = PriceManager.Instance.GetRawPriceDictionary();
         UpdateVisual();
     }
-    private void UpdateVisual()
-    {
-        foreach (Transform child in transform)
-        {
-            if (child == template) continue;
-            Destroy(child.gameObject);
-        }
-        int flag = 1;
-        priceDictionary = PriceManager.Instance.GetRawPriceDictionary();
-        foreach (var price in priceDictionary)
-        {
-            if (flag == 1)
-            {
-                template.GetComponent<PurchaseSingleIconUI>().SetKitchenObjectSO(price.Value.ToString(), price.Key);
-                flag = 0;
-                template.gameObject.SetActive(true);
-                continue;
-            }
-            Transform item = Instantiate(template, transform);
-            item.GetComponent<PurchaseSingleIconUI>().SetKitchenObjectSO(price.Value.ToString(), price.Key);
-            item.gameObject.SetActive(true);
-        }
-    }
+
     public float CalculatePrice()
     {
         float totalPrice = 0;
@@ -81,10 +59,19 @@ public class PurchaseIconUI : MonoBehaviour
     }
     public void ClearNumDictionary()
     {
-        foreach(KeyValuePair<KitchenObjectSO, int> item in numDictionary)
+        foreach (KeyValuePair<KitchenObjectSO, int> item in numDictionary)
         {
             numDictionary[item.Key] = 0;
         }
+    }
+    public override List<IData> AllData()
+    {
+        List<IData> allData = new List<IData>();
+        foreach (KeyValuePair<KitchenObjectSO, float> item in priceDictionary)
+        {
+            allData.Add(new PurchaseIconUIData(item.Key, item.Value));
+        }
+        return allData;
     }
 }
 

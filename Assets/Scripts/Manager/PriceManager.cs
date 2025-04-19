@@ -6,7 +6,9 @@ using UnityEngine;
 public class PriceManager : MonoBehaviour
 {
     public static PriceManager Instance;
-    [SerializeField] private SerializableDictionary<KitchenObjectSO, float> rawPriceDict = new SerializableDictionary<KitchenObjectSO, float>();
+    [SerializeField] private SerializableDictionary<KitchenObjectSO, float> rawPriceDict;
+    [SerializeField] private SerializableDictionary<RecipeSO, float> recipePriceDict;
+
     private void Awake()
     {
         if (Instance != null)

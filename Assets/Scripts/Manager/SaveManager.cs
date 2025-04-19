@@ -19,6 +19,10 @@ public class SaveData
         rawPriceDict = PriceManager.Instance.GetRawPriceDictionary();
         storeItemDictionary = StoreManager.Instance.GetStoreItemDictonary();
     }
+    public SaveData()
+    {
+        
+    }
 
 }
 
@@ -36,7 +40,10 @@ public class SaveManager : MonoBehaviour
     }
     private void Start()
     {
-
+        if(Loader.gameType==Loader.GameType.Load)
+        {
+            LoadGame();
+        }
     }
     public void SaveGame()
     {

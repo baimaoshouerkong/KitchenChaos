@@ -18,11 +18,6 @@ public class StoreManager : MonoBehaviour
     {
         PurchaseUI.OnPurchaseSuceess += PurchaseUI_OnPurchaseSuceess;
     }
-
-    public SerializableDictionary<KitchenObjectSO, int> GetStoreItemDictonary()
-    {
-        return storeItemDictionary;
-    }
     private void PurchaseUI_OnPurchaseSuceess(object sender, EventArgs e)
     {
         AddStoreItem();
@@ -36,9 +31,28 @@ public class StoreManager : MonoBehaviour
             storeItemDictionary[item.Key] += item.Value;
         }
     }
-    internal void LoadData(SerializableDictionary<KitchenObjectSO, int> storeItemDictionary)
+    public bool TryGetKithcenObjectSO(KitchenObjectSO kitchenObjectSO, int value)
+    {
+        if (storeItemDictionary[kitchenObjectSO]-value > 0)
+        {
+            storeItemDictionary[kitchenObjectSO] -= value;
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
+    public void LoadData(SerializableDictionary<KitchenObjectSO, int> storeItemDictionary)
     {
         this.storeItemDictionary = storeItemDictionary;
         OnStoreItemChanged?.Invoke(this, EventArgs.Empty);
     }
+
+    public SerializableDictionary<KitchenObjectSO, int> GetStoreItemDictonary()
+    {
+        return storeItemDictionary;
+    }
+
 }

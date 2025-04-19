@@ -23,7 +23,6 @@ public class PurchaseUI : MonoBehaviour
     }
     void Start()
     {
-        SaveManager.Instance.LoadGame();
         Show();
         enterButton.onClick.AddListener(() =>
         {

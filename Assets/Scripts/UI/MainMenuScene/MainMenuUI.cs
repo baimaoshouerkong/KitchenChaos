@@ -7,12 +7,18 @@ using UnityEngine.UI;
 public class MainMenuUI : MonoBehaviour
 {
     [SerializeField] private Button playButton;
+    [SerializeField] private Button loadButton;
     [SerializeField] private Button quitButton;
+    
     private void Awake()
     {
         playButton.onClick.AddListener(() =>
         {
-            Loader.Load(Loader.Scene.GameScene);
+            Loader.Load(Loader.Scene.GameScene, Loader.GameType.New);
+        });
+        loadButton.onClick.AddListener(() =>
+        {
+            Loader.Load(Loader.Scene.GameScene,Loader.GameType.Load);
         });
         quitButton.onClick.AddListener(() =>
         {
