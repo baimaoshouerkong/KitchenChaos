@@ -12,7 +12,7 @@ public class KitchenObjectUIData : IData
     }
 }
 
-public class KitchenObjectSingleUI : ISingleIconUI
+public class KitchenObjectSingleUI : MonoBehaviour, ISingleIconUI
 {
     [SerializeField] private Image image;
 

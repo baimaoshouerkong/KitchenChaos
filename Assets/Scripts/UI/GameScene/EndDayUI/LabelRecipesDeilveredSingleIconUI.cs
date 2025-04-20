@@ -4,7 +4,7 @@ using TMPro;
 using UnityEngine;
 using System;
 
-public class DeliveredItemIconUIData: IData
+public class LabelRecipesDeilveredIconUIData : IData
 {
     public string name;
     public string price;
@@ -14,7 +14,7 @@ public class DeliveredItemIconUIData: IData
         return new object[] { name, price, recipeSO };
     }
 }
-public class DeliveredItemSingleIconUI : ISingleIconUI
+public class LabelRecipesDeilveredSingleIconUI : MonoBehaviour, ISingleIconUI
 {
     [SerializeField] private TextMeshProUGUI nameText;
     [SerializeField] private TextMeshProUGUI priceText;

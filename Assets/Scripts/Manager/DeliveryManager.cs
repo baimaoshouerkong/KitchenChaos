@@ -72,7 +72,6 @@ public class DeliveryManager : MonoBehaviour
                         if (kitchenObjectSO == plateKitchenObjectSO)
                         {
                             ingredientFound = true;
-                            successRecipeSOList.Add(waitingRecipeSO);
                             break;
                         }
                     }
@@ -85,6 +84,7 @@ public class DeliveryManager : MonoBehaviour
                 if (plateContentsMatchesRecipe)
                 {
                     successfulRecipesAmount++;
+                    successRecipeSOList.Add(waitingRecipeSOList[i]);
                     waitingRecipeSOList.RemoveAt(i);
                     OnRecipeCompleted?.Invoke(this, EventArgs.Empty);
                     OnRecipeSuccess?.Invoke(this, EventArgs.Empty);

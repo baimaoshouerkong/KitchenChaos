@@ -5,7 +5,7 @@ using UnityEngine;
 using System;
 
 
-public class DeliveredItemIconUI : IconUI
+public class LabelRecipesDeilveredIconUI : IconUI
 {
     private List<RecipeSO> recipeSOList;
     private void Start()
@@ -30,7 +30,8 @@ public class DeliveredItemIconUI : IconUI
         List<IData> allData = new List<IData>();
         foreach (RecipeSO recipeSO in recipeSOList)
         {
-            allData.Add(new DeliveredItemIconUIData
+            Debug.Log(recipeSO.recipeName);
+            allData.Add(new LabelRecipesDeilveredIconUIData
             {
                 name = recipeSO.recipeName,
                 price = PriceManager.Instance.GetRecipePrice(recipeSO).ToString(),

@@ -11,7 +11,7 @@ public class KitchenGameManager : MonoBehaviour
 
 
     public static KitchenGameManager Instance { get; private set; }
-    
+
     private enum State
     {
         Purchase,
@@ -34,7 +34,7 @@ public class KitchenGameManager : MonoBehaviour
     {
         GameInput.Instance.OnPauseAction += GameInput_OnPauseAction;
     }
-    
+
     private void OnDestroy()
     {
         GameInput.Instance.OnPauseAction -= GameInput_OnPauseAction;
@@ -43,6 +43,13 @@ public class KitchenGameManager : MonoBehaviour
     public void StartGame()
     {
         state = State.CountdownToStart;
+        OnStateChanged?.Invoke(this, EventArgs.Empty);
+    }
+
+    public void EndDay()
+    {
+        state = State.EndDay;
+        gamePlayingTimer = 0f;
         OnStateChanged?.Invoke(this, EventArgs.Empty);
     }
 
@@ -80,7 +87,6 @@ public class KitchenGameManager : MonoBehaviour
                 break;
             case State.EndDay:
                 // Handle end day logic here
-                
                 break;
             case State.GameOver:
                 // Handle game over logic here
@@ -131,6 +137,6 @@ public class KitchenGameManager : MonoBehaviour
             OnGameUnpaused?.Invoke(this, EventArgs.Empty);
         }
     }
-    
+
 
 }
