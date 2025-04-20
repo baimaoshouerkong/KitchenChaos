@@ -16,7 +16,7 @@ public class StoreManager : MonoBehaviour
     }
     private void Start()
     {
-        PurchaseUI.OnPurchaseSuceess += PurchaseUI_OnPurchaseSuceess;
+        PurchaseUI.Instance.OnPurchaseSuccess += PurchaseUI_OnPurchaseSuceess;
     }
     private void PurchaseUI_OnPurchaseSuceess(object sender, EventArgs e)
     {

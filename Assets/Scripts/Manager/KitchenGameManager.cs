@@ -53,6 +53,20 @@ public class KitchenGameManager : MonoBehaviour
         OnStateChanged?.Invoke(this, EventArgs.Empty);
     }
 
+    public void NextDay()
+    {
+        state = State.Purchase;
+        DayManager.Instance.AddDayCount();
+        DeliveryManager.Instance.ClearSuccessRecipeSOList();
+        OnStateChanged?.Invoke(this, EventArgs.Empty);
+    }
+
+    public void GameOver()
+    {
+        state = State.GameOver;
+        OnStateChanged?.Invoke(this, EventArgs.Empty);
+    }
+
     private void GameInput_OnPauseAction(object sender, EventArgs e)
     {
         TogglePauseGame();
@@ -95,7 +109,10 @@ public class KitchenGameManager : MonoBehaviour
     }
 
 
-
+    public bool IsPurchase()
+    {
+        return state == State.Purchase;
+    }
     public bool IsGamePlaying()
     {
         return state == State.GamePlaying;

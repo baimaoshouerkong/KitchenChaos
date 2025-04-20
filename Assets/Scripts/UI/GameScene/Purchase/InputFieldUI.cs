@@ -4,7 +4,7 @@ using UnityEngine;
 using UnityEngine.UI;
 using TMPro;
 using System;
-using System.Windows.Markup;
+
 
 public class InputFieldUI : MonoBehaviour
 {
@@ -62,15 +62,26 @@ public class InputFieldUI : MonoBehaviour
     private void Start()
     {
         inputField.text = "0"; // Initialize the input field with a default value
+        PurchaseUI.Instance.OnPurchaseSuccess += PurchaseUI_OnPurchaseSuccess;
     }
+
+    
 
     private void OnDestroy()
     {
+        PurchaseUI.Instance.OnPurchaseSuccess -= PurchaseUI_OnPurchaseSuccess;
         decreaseButton.onClick.RemoveAllListeners();
         increaseButton.onClick.RemoveAllListeners();
         inputField.onValueChanged.RemoveAllListeners();
         inputField.onEndEdit.RemoveAllListeners();
     }
+
+    private void PurchaseUI_OnPurchaseSuccess(object sender, EventArgs e)
+    {
+        inputField.text = "0"; // Reset the input field when a purchase is made
+        InputFieldUI_OnValueChanged?.Invoke(this, 0); // Notify listeners of the reset value
+    }
+
 
     private void IncreaseValue()
     {

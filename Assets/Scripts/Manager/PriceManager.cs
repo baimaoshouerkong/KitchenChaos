@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
-
+[Serializable]
 public class PriceManager : MonoBehaviour
 {
     public static PriceManager Instance;
@@ -66,5 +66,14 @@ public class PriceManager : MonoBehaviour
             Debug.LogError("Recipe not found in price dictionary.");
             return 0f;
         }
+    }
+    public float GetEarnedMoney()
+    {
+        float totalPrice = 0f;
+        foreach (var item in DeliveryManager.Instance.GetSuccessRecipeSOList())
+        {
+            totalPrice += recipePriceDict[item];
+        }
+        return totalPrice;
     }
 }

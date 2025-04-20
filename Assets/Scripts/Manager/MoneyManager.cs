@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using System;
+using Unity.VisualScripting;
 
 [Serializable]
 public class MoneyManager : MonoBehaviour
@@ -17,13 +18,23 @@ public class MoneyManager : MonoBehaviour
 
     void Start()
     {
-
+        KitchenGameManager.Instance.OnStateChanged += KitchenGameManager_OnStateChanged;
     }
+
+
 
     // Update is called once per frame
     void Update()
     {
 
+    }
+
+    private void KitchenGameManager_OnStateChanged(object sender, EventArgs e)
+    {
+        if (KitchenGameManager.Instance.IsDayOver())
+        {
+            AddMoney(PriceManager.Instance.GetEarnedMoney());
+        }
     }
 
     public float GetMoney()
@@ -40,5 +51,9 @@ public class MoneyManager : MonoBehaviour
         money -= amount;
         OnMoneyChanged?.Invoke(this, EventArgs.Empty);
     }
-    
+    public void AddMoney(float amount)
+    {
+        money += amount;
+        OnMoneyChanged?.Invoke(this, EventArgs.Empty);
+    }
 }

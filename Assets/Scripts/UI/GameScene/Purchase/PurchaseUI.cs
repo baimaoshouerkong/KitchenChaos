@@ -7,8 +7,8 @@ using UnityEngine.UI;
 
 public class PurchaseUI : MonoBehaviour
 {
-    public static event EventHandler OnPurchaseSuceess;
-    public static PurchaseUI Instance { get; private set; }
+    public event EventHandler OnPurchaseSuccess;
+    public static PurchaseUI Instance;
     [SerializeField] private Button enterButton;
     [SerializeField] private Button exitButton;
     [SerializeField] private Button saveButton;
@@ -23,7 +23,8 @@ public class PurchaseUI : MonoBehaviour
     }
     void Start()
     {
-        Show();
+        Hide();
+        KitchenGameManager.Instance.OnStateChanged += KitchenGameManager_OnStateChanged;
         enterButton.onClick.AddListener(() =>
         {
             KitchenGameManager.Instance.StartGame();
@@ -43,10 +44,13 @@ public class PurchaseUI : MonoBehaviour
             if (TryPurchase())
             {
                 MoneyManager.Instance.PayMoney(purchaseIconUI.CalculatePrice());
-                OnPurchaseSuceess?.Invoke(this, EventArgs.Empty);
+                OnPurchaseSuccess?.Invoke(this, EventArgs.Empty);
             }
         });
     }
+
+  
+
     private void OnDestroy()
     {
         enterButton.onClick.RemoveAllListeners();
@@ -54,7 +58,14 @@ public class PurchaseUI : MonoBehaviour
         saveButton.onClick.RemoveAllListeners();
         buyButton.onClick.RemoveAllListeners();
     }
-
+    private void KitchenGameManager_OnStateChanged(object sender, EventArgs e)
+    {
+        if (KitchenGameManager.Instance.IsPurchase())
+        {
+            Show();
+        }
+ 
+    }
     private bool TryPurchase()
     {
         return (MoneyManager.Instance.GetMoney() - purchaseIconUI.CalculatePrice()) >= 0;

@@ -24,18 +24,26 @@ public class IconUI : MonoBehaviour, IIconUI
             Destroy(child.gameObject);
         }
         List<IData> allData = AllData();
-        for (int i = 0; i < allData.Count; i++)
+        if (allData.Count == 0)
         {
-            if (i == 0)
+            template.gameObject.SetActive(false);
+            return;
+        }
+        else
+        {
+            for (int i = 0; i < allData.Count; i++)
             {
-                template.GetComponent<ISingleIconUI>().SetSingleUI(SerializeData(allData[i]));
-                template.gameObject.SetActive(true);
-                continue;
-            }
+                if (i == 0)
+                {
+                    template.GetComponent<ISingleIconUI>().SetSingleUI(SerializeData(allData[i]));
+                    template.gameObject.SetActive(true);
+                    continue;
+                }
 
-            Transform item = Instantiate(template, transform);
-            item.GetComponent<ISingleIconUI>().SetSingleUI(SerializeData(allData[i]));
-            item.gameObject.SetActive(true);
+                Transform item = Instantiate(template, transform);
+                item.GetComponent<ISingleIconUI>().SetSingleUI(SerializeData(allData[i]));
+                item.gameObject.SetActive(true);
+            }
         }
     }
 }

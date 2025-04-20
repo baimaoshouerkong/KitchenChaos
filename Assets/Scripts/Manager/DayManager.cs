@@ -14,11 +14,18 @@ public class DayManager : MonoBehaviour
     }
     public int GetDayCount()
     {
+        Debug.Log("GetDay Count: " + dayCount);
         return dayCount;
+
     }
     public void SetDayCount(int count)
     {
         dayCount = count;
     }
-   
+    public void AddDayCount()
+    {
+        dayCount += 1;
+        Debug.Log("Day Count: " + dayCount);
+    }
+
 }

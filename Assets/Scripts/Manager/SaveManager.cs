@@ -8,16 +8,16 @@ using UnityEngine;
 [Serializable]
 public class SaveData
 {
-    public float money;
-    public int dayCount;
-    public SerializableDictionary<KitchenObjectSO, float> rawPriceDict;
-    public SerializableDictionary<KitchenObjectSO, int> storeItemDictionary;
+    public DayManager dayManager;
+    public MoneyManager moneyManager;
+    public PriceManager priceManager;
+    public StoreManager storeManager;
     public SaveData(string a)
     {
-        money = MoneyManager.Instance.GetMoney();
-        dayCount = DayManager.Instance.GetDayCount();
-        rawPriceDict = PriceManager.Instance.GetRawPriceDictionary();
-        storeItemDictionary = StoreManager.Instance.GetStoreItemDictonary();
+        dayManager = DayManager.Instance;
+        moneyManager = MoneyManager.Instance;
+        priceManager = PriceManager.Instance;
+        storeManager = StoreManager.Instance;
     }
     public SaveData()
     {
@@ -48,6 +48,7 @@ public class SaveManager : MonoBehaviour
     public void SaveGame()
     {
         string json = JsonUtility.ToJson(new SaveData("save"));
+        Debug.Log(json);
         System.IO.File.WriteAllText(filename, json);
     }
     public void LoadGame()
@@ -57,14 +58,10 @@ public class SaveManager : MonoBehaviour
             string json = System.IO.File.ReadAllText(filename);
             Debug.Log(json);
             SaveData saveData = JsonUtility.FromJson<SaveData>(json);
-            foreach (KeyValuePair<KitchenObjectSO, int> item in saveData.storeItemDictionary)
-            {
-                Debug.Log(item.Key + " " + item.Value);
-            }
-            MoneyManager.Instance.SetMoney(saveData.money);
-            DayManager.Instance.SetDayCount(saveData.dayCount);
-            PriceManager.Instance.LoadData(saveData.rawPriceDict);
-            StoreManager.Instance.LoadData(saveData.storeItemDictionary);
+            DayManager.Instance = saveData.dayManager;
+            MoneyManager.Instance = saveData.moneyManager;
+            PriceManager.Instance = saveData.priceManager;
+            StoreManager.Instance = saveData.storeManager;
         }
     }
 

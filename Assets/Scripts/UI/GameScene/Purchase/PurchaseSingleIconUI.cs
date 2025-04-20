@@ -28,12 +28,18 @@ public class PurchaseSingleIconUI : MonoBehaviour,ISingleIconUI
     private int num;
     private void Awake()
     {
-        inputFieldUI.InputFieldUI_OnValueChanged += OnInputFieldValueChanged;
         num = 0;
     }
-    private void OnDestroy() {
-        inputFieldUI.InputFieldUI_OnValueChanged -= OnInputFieldValueChanged;    
+    private void Start()
+    {
+        inputFieldUI.InputFieldUI_OnValueChanged += OnInputFieldValueChanged;
     }
+    private void OnDestroy()
+    {
+        inputFieldUI.InputFieldUI_OnValueChanged -= OnInputFieldValueChanged;
+    }
+
+
 
     public void OnInputFieldValueChanged(object sender, int value)
     {
