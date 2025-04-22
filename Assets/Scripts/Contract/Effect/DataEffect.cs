@@ -3,10 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-
-public abstract class DataEffect : Effect
+// 对于数据来说优先级先先对优先级的进行运算
+public class DataEffect<T> : Effect<T>
 {
-    protected DataEffect(Action action, EffectPriority priority, EffectType effectType = EffectType.DataEffect) : base(action, priority, effectType)
+    protected DataEffect(EffectPriority priority, EffectType effectType = EffectType.DataEffect) : base( priority, effectType)
     {
 
     }

@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-public abstract class SpecialEffect : Effect
+public class SpecialEffect<T> : Effect<T>
 {
-    protected SpecialEffect(Action action, EffectPriority priority,EffectType effectType = EffectType.SpecialEffect) : base(action, priority, effectType)
+    protected SpecialEffect(EffectPriority priority,EffectType effectType = EffectType.SpecialEffect) : base( priority, effectType)
     {
         
     }

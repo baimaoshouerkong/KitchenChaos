@@ -18,19 +18,17 @@ public enum EffectType
     DataEffect,
 }
 
-public abstract class Effect : IEffect
+public abstract class Effect<T> : IEffect
 {
-
-    protected Action action;
+    
     protected EffectType effectType;
     protected EffectPriority priority;
     protected bool isActive = false;
 
-    protected Effect(Action action, EffectPriority priority, EffectType effectType)
+    protected Effect( EffectPriority priority, EffectType effectType)
     {
         this.effectType = effectType;
         this.priority = priority;
-        this.action = action;
         isActive = false;
     }
 
@@ -44,6 +42,11 @@ public abstract class Effect : IEffect
         isActive = false;
     }
 
-    
+
+    public EffectPriority GetEffectPriority()
+    {
+        return priority;
+    }
+
 }
 
