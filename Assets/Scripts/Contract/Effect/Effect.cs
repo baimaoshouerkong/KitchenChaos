@@ -1,0 +1,49 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+// 这个定义优先级，类似于执行的顺序
+// 后面的有个关于这个计算
+public enum EffectPriority
+{
+    None,
+    Low,
+    Medium,
+    High,
+}
+public enum EffectType
+{
+    None,
+    SpecialEffect,
+    DataEffect,
+}
+
+public abstract class Effect : IEffect
+{
+
+    protected Action action;
+    protected EffectType effectType;
+    protected EffectPriority priority;
+    protected bool isActive = false;
+
+    protected Effect(Action action, EffectPriority priority, EffectType effectType)
+    {
+        this.effectType = effectType;
+        this.priority = priority;
+        this.action = action;
+        isActive = false;
+    }
+
+    public void Apply()
+    {
+        isActive = true;
+    }
+
+    public void Cancel()
+    {
+        isActive = false;
+    }
+
+    
+}
+
