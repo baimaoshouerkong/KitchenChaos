@@ -5,8 +5,9 @@ using System.Threading.Tasks;
 
 public class SpecialEffect<T> : Effect<T>
 {
-    protected SpecialEffect(EffectPriority priority,EffectType effectType = EffectType.SpecialEffect) : base( priority, effectType)
+    public Action action;
+    protected SpecialEffect(EffectPriority priority, EffectType effectType = EffectType.SpecialEffect) : base(priority, effectType)
     {
-        
+
     }
 }

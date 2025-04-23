@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 // 后面的有个关于这个计算
 public enum EffectPriority
 {
-    None,
     Low,
     Medium,
     High,
 }
+
 public enum EffectType
 {
     None,

@@ -3,37 +3,39 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
+public enum BuffType
+{
+    DataEffect,
+    SpecialEffect,
+    DataAndSpecialEffect
+}
+
+/// <summary>
+/// 对于一个buff来说他是对于某一个物体的数值上的影响，或者效果上的影响
+/// </summary>
+/// <typeparam name="T"></typeparam>
 public abstract class Buff<T> : IBuff
 {
-    public List<DataEffect<T>> dataEffects;
-    public List<SpecialEffect<T>> specialEffects;
-    public Buff()
-    {
-        dataEffects = new List<DataEffect<T>>();
-        specialEffects = new List<SpecialEffect<T>>();
-    }
-    public Buff(List<Effect<T>> effects)
-    {
-        foreach (var effect in effects)
-        {
-            if (effect is DataEffect<T> dataEffect)
-            {
-                dataEffects.Add(dataEffect);
-            }
-            else if (effect is SpecialEffect<T> specialEffect)
-            {
-                specialEffects.Add(specialEffect);
-            }
-        }
+    public DataEffect<T> dataEffect = null;
+    public SpecialEffect<T> specialEffect = null;
 
+    public BuffType buffType;
+    public Buff(BuffType buffType, DataEffect<T> dataEffect = null, SpecialEffect<T> specialEffect = null)
+    {
+        this.buffType = buffType;
+        if (dataEffect != null)
+            this.dataEffect = dataEffect;
+        if (specialEffect != null)
+            this.specialEffect = specialEffect;
     }
 
-    public void Apply()
+
+    public virtual void Apply()
     {
 
     }
 
-    public void Cancel()
+    public virtual void Cancel()
     {
 
     }
