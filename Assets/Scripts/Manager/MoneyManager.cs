@@ -10,6 +10,9 @@ public class MoneyManager : MonoBehaviour
     public event EventHandler OnMoneyChanged;
     public static MoneyManager Instance;
 
+    [SerializeField] public float weekCost = 0;
+
+
     [SerializeField] private float money = 100;
     private void Awake()
     {
@@ -36,6 +39,8 @@ public class MoneyManager : MonoBehaviour
             AddMoney(PriceManager.Instance.GetEarnedMoney());
         }
     }
+    
+ 
 
     public float GetMoney()
     {

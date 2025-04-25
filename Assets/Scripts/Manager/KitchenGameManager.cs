@@ -101,6 +101,7 @@ public class KitchenGameManager : MonoBehaviour
                 break;
             case State.EndDay:
                 // Handle end day logic here
+                OnStateChanged?.Invoke(this, EventArgs.Empty);
                 break;
             case State.GameOver:
                 // Handle game over logic here
