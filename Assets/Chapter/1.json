@@ -1,0 +1,34 @@
+{
+    "chapter": 1,
+    "title" : "开篇",
+    "content" :[
+        {
+            "id":1,
+            "type":"tall",
+            "object":"null",
+            "text":"你好，这里是你的餐厅，你有一个梦想，成为世界上最好的厨师。你需要在这里经营你的餐厅，制作美味的食物，吸引顾客，赚取金币，升级你的厨房设备和食谱。",
+            "emotion":""
+        },
+        {
+            "id":2,
+            "type": "tall",
+            "text":"当然，你的厨房不是免费的，每周都会收取你的租金",
+            "object": "null",
+            "emotion": ""
+        },
+        {
+            "id":3,
+            "type": "tall",
+            "object": "null",
+            "text": "但是，这个厨房有点特殊，不知为何，这里总是会变得混乱。",
+            "emotion": ""
+        },
+        {
+            "id":4,
+            "type":"tall",
+            "object":"null",
+            "text":"希望你能够征服这个厨房。",
+            "emotion": ""
+        }
+    ]
+}
